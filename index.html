@@ -1,26 +1,10 @@
 <!doctype html>
-<html lang="en" ng-app="decoders">
+<html lang="en">
   <head>
-    <meta name="viewport" content="width=600,initial-scale=1.0,user-scalable=0">
-
-    <link rel="stylesheet" href="styles/app.css">
-
-    <script src="scripts/angular.min.js"></script>
-    <script src="scripts/decoders.js"></script>
+    <title>Internet Protocol Utilities</title>
   </head>
-  <body ng-controller="DecoderCtrl">
-    <div class="result-list">
-
-      <div class="result-item">
-        <textarea class="form-control" ng-model="iterations[0].rawText" rows="5"></textarea>
-        <select ng-options="format.name for format in supportedFormats" ng-model="iterations[0].codec" ng-change="pushNew(0)"></select>
-      </div>
-
-      <div class="result-item" ng-repeat="itr in iterations">
-        <textarea ng-if="!$first" rows="5">{{ computeTransform($index) }}</textarea>
-        <select ng-if="!$first" ng-options="format.name for format in supportedFormats" ng-model="itr.codec" ng-change="pushNew($index)"></select>
-      </div>
-
-    </div>
+  <body>
+    <p><a href="decoders.html">Coders and Decoders</a></p>
+    <p>Speed Test: <a href="50M.test">50M</a></p>
   </body>
 </html>
