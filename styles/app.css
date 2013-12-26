@@ -1,0 +1,16 @@
+.result-list {
+  width: 640px;
+}
+
+.result-item {
+  width: 640px;
+}
+
+textarea {
+  width: 500px;
+  height: 100px;
+}
+
+select {
+  width: 100px;
+}
