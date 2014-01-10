@@ -27,6 +27,18 @@ decoders.controller('DecoderCtrl', function ($scope) {
       }
     },
     {
+      'name': 'To Lower',
+      'modifier': function (text) {
+        return text.toLowerCase();
+      }
+    },
+    {
+      'name': 'To Upper',
+      'modifier': function (text) {
+        return text.toUpperCase();
+      }
+    },
+    {
       'name': 'URL Encode',
       'modifier': function (text) {
         return encodeURIComponent(text);
@@ -91,6 +103,31 @@ decoders.controller('DecoderCtrl', function ($scope) {
           out += data.charCodeAt(i).toString(16).zfill(2) + ' ';
         }
         return out;
+      }
+    },
+    {
+      'name': 'Frequency Analysis',
+      'modifier': function (data) {
+        var histogram = new Array(256);
+        for (var i = 0; i < histogram.length; i++) {
+          histogram[i] = 0;
+        }
+
+        for (var i = 0; i < data.length; i++) {
+          var codePoint = data.charCodeAt(i);
+          histogram[codePoint]++;
+        }
+        
+        var buf = 'Original String:\n' + data + '\n\n';
+        for (var i = 0; i < histogram.length; i++) {
+          if (histogram[i] == 0) {
+            continue;
+          }
+          var percentage = Math.round((histogram[i] / data.length) * 100000) / 1000;
+          buf += i.toString(16).zfill(2) + ': ' + percentage + '%\n'
+        }
+
+        return buf;
       }
     }
   ];
