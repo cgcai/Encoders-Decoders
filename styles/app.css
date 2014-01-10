@@ -1,16 +1,19 @@
-.result-list {
-  width: 640px;
+.item {
+  width: 540px;
+  margin: 0 auto;
 }
 
-.result-item {
-  width: 640px;
+.item > textarea {
+  float: left;
+  width: 400px;
+  overflow: hidden;
 }
 
-textarea {
-  width: 500px;
-  height: 100px;
+.item > select {
+  float: right;
+  width: 120px;
 }
 
-select {
-  width: 100px;
+.result > textarea {
+  background-color: #eee;
 }
