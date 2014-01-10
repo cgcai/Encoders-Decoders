@@ -1,5 +1,16 @@
-var decoders = angular.module('decoders', []);
+String.prototype.lpad = function (fill, width) {
+  var str = this;
+  while (str.length < width) {
+    str = fill + str;
+  }
+  return str;
+};
 
+String.prototype.zfill = function (width) {
+  return this.lpad('0', width);
+};
+
+var decoders = angular.module('decoders', []);
 decoders.controller('DecoderCtrl', function ($scope) {
   $scope.supportedFormats = [
     {
@@ -37,7 +48,7 @@ decoders.controller('DecoderCtrl', function ($scope) {
       'modifier': function (text) {
         var result = '';
         for (var i = 0; i < text.length; i++) {
-          result += text.charCodeAt(i).toString(16);
+          result += text.charCodeAt(i).toString(16).zfill(2);
         }
         return result;
       }
@@ -58,11 +69,31 @@ decoders.controller('DecoderCtrl', function ($scope) {
     }
   ];
 
+  $scope.displayFormats = [
+    {
+      'name': 'Text',
+      'modifier': function (data) {
+        return data;
+      }
+    },
+    {
+      'name': 'Binary',
+      'modifier': function (data) {
+        var out = '';
+        for (var i = 0; i < data.length; i++) {
+          out += data.charCodeAt(i).toString(16).zfill(2) + ' ';
+        }
+        return out;
+      }
+    }
+  ];
+
   $scope.iterations = [{
     'prev': 0,
     'rawData': '',
     'text': '',
-    'codec': $scope.supportedFormats[0]
+    'codec': $scope.supportedFormats[0],
+    'format': $scope.displayFormats[0]
   }];
 
   $scope.pushNew = function (prev) {
@@ -72,7 +103,8 @@ decoders.controller('DecoderCtrl', function ($scope) {
       'prev': prev,
       'rawData': '',
       'text': '',
-      'codec': $scope.supportedFormats[0]
+      'codec': $scope.supportedFormats[0],
+      'format': $scope.displayFormats[0]
     });
   };
 
@@ -81,7 +113,7 @@ decoders.controller('DecoderCtrl', function ($scope) {
     var prev = $scope.iterations[itr.prev];
     var modifier = prev.codec.modifier;
     itr.rawData = modifier(prev.rawData);
-    return itr.rawData;
+    return itr.format.modifier(itr.rawData);
   };
 
 });
