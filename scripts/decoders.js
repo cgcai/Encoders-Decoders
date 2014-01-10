@@ -9,6 +9,12 @@ decoders.controller('DecoderCtrl', function ($scope) {
       }
     },
     {
+      'name': 'Trim',
+      'modifier': function (text) {
+        return text.trim();
+      }
+    },
+    {
       'name': 'URL Encode',
       'modifier': function (text) {
         return encodeURIComponent(text);
