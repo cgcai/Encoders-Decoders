@@ -10,12 +10,12 @@
     <div>
 
       <div class="item">
-        <textarea ng-model="iterations[0].rawText" rows="5"></textarea>
+        <textarea ng-model="iterations[0].rawData" rows="7"></textarea>
         <select ng-options="format.name for format in supportedFormats" ng-model="iterations[0].codec" ng-change="pushNew(0)"></select>
       </div>
 
       <div class="result item" ng-repeat="itr in iterations">
-        <textarea ng-if="!$first" rows="5" readonly>{{ computeTransform($index) }}</textarea>
+        <textarea ng-if="!$first" rows="7" readonly>{{ computeTransform($index) }}</textarea>
         <select ng-if="!$first" ng-options="format.name for format in supportedFormats" ng-model="itr.codec" ng-change="pushNew($index)"></select>
       </div>
 

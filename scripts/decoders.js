@@ -9,12 +9,6 @@ decoders.controller('DecoderCtrl', function ($scope) {
       }
     },
     {
-      'name': 'Trim',
-      'modifier': function (text) {
-        return text.trim();
-      }
-    },
-    {
       'name': 'URL Encode',
       'modifier': function (text) {
         return encodeURIComponent(text);
@@ -66,7 +60,8 @@ decoders.controller('DecoderCtrl', function ($scope) {
 
   $scope.iterations = [{
     'prev': 0,
-    'rawText': '',
+    'rawData': '',
+    'text': '',
     'codec': $scope.supportedFormats[0]
   }];
 
@@ -75,7 +70,8 @@ decoders.controller('DecoderCtrl', function ($scope) {
 
     $scope.iterations.push({
       'prev': prev,
-      'rawText': '',
+      'rawData': '',
+      'text': '',
       'codec': $scope.supportedFormats[0]
     });
   };
@@ -84,8 +80,8 @@ decoders.controller('DecoderCtrl', function ($scope) {
     var itr = $scope.iterations[index];
     var prev = $scope.iterations[itr.prev];
     var modifier = prev.codec.modifier;
-    itr.rawText = modifier(prev.rawText);
-    return itr.rawText;
+    itr.rawData = modifier(prev.rawData);
+    return itr.rawData;
   };
 
 });
