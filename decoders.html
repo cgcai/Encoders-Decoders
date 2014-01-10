@@ -18,7 +18,7 @@
         <textarea ng-if="!$first" rows="7" readonly>{{ computeTransform($index) }}</textarea>
         <select ng-if="!$first" ng-options="format.name for format in supportedFormats" ng-model="itr.codec" ng-change="pushNew($index)"></select>
         <br>
-        <select ng-if="!$first" ng-options="format.name for format in displayFormats" ng-model="itr.format"></select>
+        <select ng-if="!$first" ng-options="format.name for format in outputDrivers" ng-model="itr.format"></select>
       </div>
 
     </div>

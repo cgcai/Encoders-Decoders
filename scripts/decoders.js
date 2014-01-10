@@ -14,6 +14,13 @@ var decoders = angular.module('decoders', []);
 decoders.controller('DecoderCtrl', function ($scope) {
   $scope.supportedFormats = [
     {
+      // Dummy first entry.
+      'name': '-Select Action-',
+      'modifier': function (text) {
+        return text;
+      }
+    },
+    {
       'name': 'Echo',
       'modifier': function (text) {
         return text;
@@ -69,7 +76,7 @@ decoders.controller('DecoderCtrl', function ($scope) {
     }
   ];
 
-  $scope.displayFormats = [
+  $scope.outputDrivers = [
     {
       'name': 'Text',
       'modifier': function (data) {
@@ -93,7 +100,7 @@ decoders.controller('DecoderCtrl', function ($scope) {
     'rawData': '',
     'text': '',
     'codec': $scope.supportedFormats[0],
-    'format': $scope.displayFormats[0]
+    'format': $scope.outputDrivers[0]
   }];
 
   $scope.pushNew = function (prev) {
@@ -104,7 +111,7 @@ decoders.controller('DecoderCtrl', function ($scope) {
       'rawData': '',
       'text': '',
       'codec': $scope.supportedFormats[0],
-      'format': $scope.displayFormats[0]
+      'format': $scope.outputDrivers[0]
     });
   };
 
